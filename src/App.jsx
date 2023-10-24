@@ -1,14 +1,15 @@
-import { CssBaseline } from "@mui/material"
-import WheaterInfo from "./components/WheatherInfo"
+import { CssBaseline } from "@mui/material";
+import WeatherInfo from "./components/WeatherInfo";
+import WeatherForm from "./components/WeatherForm";
 
 function App() {
-
   return (
     <>
-    <CssBaseline/>
-      <WheaterInfo/>
+      <CssBaseline />
+      <WeatherForm />
+      <WeatherInfo />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
