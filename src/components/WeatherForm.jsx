@@ -11,21 +11,33 @@ const WheaterFrom = () => {
 
   const [city, setCity] = useState("");
   const [countryCode, setCountryCode] = useState("");
-
+  const [temperature, setTemperature] = useState({
+    current: null,
+    max: null,
+    min: null,
+  });
   const [weatherData, setWeatherData] = useState(null);
 
   useEffect(() => {
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city},${countryCode}&appid=${apiKey}`;
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city},${countryCode}&appid=${apiKey}&units=metric`;
 
     axios
       .get(apiUrl)
       .then((response) => {
         setWeatherData(response.data);
+
+        setTemperature({
+          current: response.data.main.temp,
+          max: response.data.main.temp_max,
+          min: response.data.main.temp_min,
+        });
       })
       .catch((error) => {
         console.error("Error al cargar datos del clima:", error);
       });
   }, [city, countryCode, apiKey]);
+
+  console.log(weatherData);
 
   return (
     <>
@@ -117,7 +129,7 @@ const WheaterFrom = () => {
         </Formik>
       </Box>
       {weatherData ? (
-       <WeatherInfo weatherData={weatherData}/>
+       <WeatherInfo temperature={temperature}/>
       ) : (
         <p>Cargando...</p>
       )}

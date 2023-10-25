@@ -1,14 +1,33 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import { Card, CardContent, Typography } from "@mui/material";
 
-const WeatherInfo = ({weatherData}) => {
-    return ( 
+const WeatherInfo = ({ temperature }) => {
+  
+console.log(temperature);
+  return (
     <>
-    {weatherData.coord}
-    </> );
-}
+    {temperature ?
+   <Card>
+   <CardContent>
+     <Typography variant="h6">Información Climática</Typography>
+     <Typography variant="body1">
+       Temperatura Actual: {temperature.current} °C
+     </Typography>
+     <Typography variant="body1">
+       Temperatura Máxima: {temperature.max} °C
+     </Typography>
+     <Typography variant="body1">
+       Temperatura Mínima: {temperature.min} °C
+     </Typography>
+   </CardContent>
+ </Card>
+   :null}
+    </>
+    );
+};
 
 WeatherInfo.propTypes = {
-    weatherData: PropTypes.object.isRequired,
-}
- 
+    temperature: PropTypes.object.isRequired,
+  };
+
 export default WeatherInfo;
