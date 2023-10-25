@@ -1,4 +1,4 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import { Formik } from "formik";
 import { useEffect, useRef, useState } from "react";
 import { principal } from "./stylesFrom";
@@ -10,7 +10,7 @@ const WheaterFrom = () => {
   const apiKey = import.meta.env.VITE_SOME_KEY;
 
   const [city, setCity] = useState("");
-  const [countryCode, setCountryCode] = useState("");
+
   const [temperature, setTemperature] = useState({
     temperatura: null,
     temMax: null,
@@ -25,7 +25,7 @@ const WheaterFrom = () => {
   const [weatherData, setWeatherData] = useState(null);
 
   useEffect(() => {
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city},${countryCode}&appid=${apiKey}&units=metric`;
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
     axios
       .get(apiUrl)
@@ -47,19 +47,13 @@ const WheaterFrom = () => {
       .catch((error) => {
         console.error("Error al cargar datos del clima:", error);
       });
-  }, [city, countryCode, apiKey]);
+  }, [city, apiKey]);
 
   console.log(weatherData);
 
   return (
     <>
       <Box sx={principal}>
-        <Typography variant="h4" gutterBottom fontWeight={700}>
-          Pais
-        </Typography>
-        <Typography variant="body1" gutterBottom fontWeight={400} fontSize={22}>
-          Ciudad
-        </Typography>
         <Formik
           initialValues={{
             pais: "",
@@ -67,13 +61,6 @@ const WheaterFrom = () => {
           }}
           validate={(valores) => {
             let errores = {};
-
-            // Validacion Pais
-            if (!valores.pais) {
-              errores.pais = "Pais inválido";
-            } else if (!/^[a-zA-ZÁ-ÿ\s]{1,40}$/.test(valores.pais)) {
-              errores.pais = "Ingrese un Pais válido";
-            }
 
             // Validacion ciudad
             if (!valores.ciudad) {
@@ -86,7 +73,6 @@ const WheaterFrom = () => {
           }}
           onSubmit={(valores, { resetForm }) => {
             resetForm();
-            setCountryCode(valores.pais);
             setCity(valores.ciudad);
           }}
         >
@@ -100,20 +86,6 @@ const WheaterFrom = () => {
             isSubmitting,
           }) => (
             <form onSubmit={handleSubmit} ref={form}>
-              <TextField
-                fullWidth
-                label="Pais"
-                variant="outlined"
-                name="pais"
-                placeholder="Pais"
-                value={values.pais}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={Boolean(errors.pais && touched.pais)}
-                helperText={errors.pais && touched.pais && errors.pais}
-                autoComplete="off"
-                margin="normal"
-              />
               <TextField
                 fullWidth
                 label="Ciudad"
