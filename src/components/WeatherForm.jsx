@@ -1,7 +1,7 @@
 import { Box, Button, TextField } from "@mui/material";
 import { Formik } from "formik";
 import { useEffect, useRef, useState } from "react";
-import { principal } from "./stylesFrom";
+import { principal, secundario } from "./stylesFrom";
 import axios from "axios";
 import WeatherInfo from "./WeatherInfo";
 
@@ -25,7 +25,7 @@ const WheaterFrom = () => {
   const [weatherData, setWeatherData] = useState(null);
 
   useEffect(() => {
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang={es}`;
 
     axios
       .get(apiUrl)
@@ -39,8 +39,8 @@ const WheaterFrom = () => {
           pais: response.data.sys.country,
           ciudad: response.data.name,
           humedad: response.data.main.humidity,
-          senReal: response.data.feels_like,
-          presion: response.data.pressure,
+          senReal: response.data.main.feels_like,
+          presion: response.data.main.pressure,
           viento: response.data.wind.speed,
         });
       })
@@ -85,30 +85,32 @@ const WheaterFrom = () => {
             handleBlur,
             isSubmitting,
           }) => (
-            <form onSubmit={handleSubmit} ref={form}>
-              <TextField
-                fullWidth
-                label="Ciudad"
-                variant="outlined"
-                name="ciudad"
-                placeholder="Ciudad"
-                value={values.ciudad}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={Boolean(errors.ciudad && touched.ciudad)}
-                helperText={errors.ciudad && touched.ciudad && errors.ciudad}
-                autoComplete="off"
-                margin="normal"
-              />
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                disabled={isSubmitting}
-              >
-                Buscar
-              </Button>
-            </form>
+            <Box sx={secundario}>
+              <form onSubmit={handleSubmit} ref={form}>
+                <TextField
+                  fullWidth
+                  label="Ciudad"
+                  variant="outlined"
+                  name="ciudad"
+                  placeholder="Ciudad"
+                  value={values.ciudad}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={Boolean(errors.ciudad && touched.ciudad)}
+                  helperText={errors.ciudad && touched.ciudad && errors.ciudad}
+                  autoComplete="off"
+                  margin="normal"
+                />
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  disabled={isSubmitting}
+                >
+                  Buscar
+                </Button>
+              </form>
+            </Box>
           )}
         </Formik>
       </Box>
