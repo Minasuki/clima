@@ -90,7 +90,7 @@ const WheaterFrom = () => {
                 <TextField
                   fullWidth
                   label="Ciudad"
-                  variant="outlined"
+                  variant="standard"
                   name="ciudad"
                   placeholder="Ciudad"
                   value={values.ciudad}
@@ -103,7 +103,7 @@ const WheaterFrom = () => {
                 />
                 <Button
                   type="submit"
-                  variant="contained"
+                  variant="text"
                   color="primary"
                   disabled={isSubmitting}
                 >
