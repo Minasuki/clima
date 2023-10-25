@@ -12,9 +12,15 @@ const WheaterFrom = () => {
   const [city, setCity] = useState("");
   const [countryCode, setCountryCode] = useState("");
   const [temperature, setTemperature] = useState({
-    current: null,
-    max: null,
-    min: null,
+    temperatura: null,
+    temMax: null,
+    temMin: null,
+    pais: null,
+    ciudad: null,
+    humedad: null,
+    senReal: null,
+    presion: null,
+    viento: null,
   });
   const [weatherData, setWeatherData] = useState(null);
 
@@ -27,9 +33,15 @@ const WheaterFrom = () => {
         setWeatherData(response.data);
 
         setTemperature({
-          current: response.data.main.temp,
-          max: response.data.main.temp_max,
-          min: response.data.main.temp_min,
+          temperatura: response.data.main.temp,
+          temMax: response.data.main.temp_max,
+          temMin: response.data.main.temp_min,
+          pais: response.data.sys.country,
+          ciudad: response.data.name,
+          humedad: response.data.main.humidity,
+          senReal: response.data.feels_like,
+          presion: response.data.pressure,
+          viento: response.data.wind.speed,
         });
       })
       .catch((error) => {
@@ -129,7 +141,7 @@ const WheaterFrom = () => {
         </Formik>
       </Box>
       {weatherData ? (
-       <WeatherInfo temperature={temperature}/>
+        <WeatherInfo temperature={temperature} />
       ) : (
         <p>Cargando...</p>
       )}
