@@ -71,8 +71,7 @@ const WheaterFrom = () => {
 
             return errores;
           }}
-          onSubmit={(valores, { resetForm }) => {
-            resetForm();
+          onSubmit={(valores) => {
             setCity(valores.ciudad);
           }}
         >
@@ -92,7 +91,6 @@ const WheaterFrom = () => {
                   label="Ciudad"
                   variant="standard"
                   name="ciudad"
-                  placeholder="Ciudad"
                   value={values.ciudad}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -100,6 +98,7 @@ const WheaterFrom = () => {
                   helperText={errors.ciudad && touched.ciudad && errors.ciudad}
                   autoComplete="off"
                   margin="normal"
+                  focused
                 />
                 <Button
                   type="submit"
