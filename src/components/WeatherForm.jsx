@@ -1,9 +1,19 @@
-import { Box, Button, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  CardMedia,
+  Container,
+  Input,
+  Paper,
+  Typography,
+} from "@mui/material";
 import { Formik } from "formik";
 import { useEffect, useRef, useState } from "react";
 import { principal, secundario } from "./stylesFrom";
 import axios from "axios";
 import WeatherInfo from "./WeatherInfo";
+import { botonBuscar, caja, container, inputText } from "./stylesFrom2";
+import Lupa from "../img/lagruesa.svg";
 
 const WheaterFrom = () => {
   const form = useRef();
@@ -53,72 +63,91 @@ const WheaterFrom = () => {
 
   return (
     <>
-      <Box sx={principal}>
-        <Formik
-          initialValues={{
-            pais: "",
-            ciudad: "",
-          }}
-          validate={(valores) => {
-            let errores = {};
+    <Box sx={principal}>
+      <Formik
+        initialValues={{
+          pais: "",
+          ciudad: "",
+        }}
+        validate={(valores) => {
+          let errores = {};
 
-            // Validacion ciudad
-            if (!valores.ciudad) {
-              errores.ciudad = "Ciudad inválido";
-            } else if (!/^[a-zA-ZÁ-ÿ\s]{1,40}$/.test(valores.ciudad)) {
-              errores.ciudad = "Ingrese un Ciudad válido";
-            }
+          // Validacion ciudad
+          if (!valores.ciudad) {
+            errores.ciudad = "Ciudad inválido";
+          } else if (!/^[a-zA-ZÁ-ÿ\s]{1,40}$/.test(valores.ciudad)) {
+            errores.ciudad = "Ingrese un Ciudad válido";
+          }
 
-            return errores;
-          }}
-          onSubmit={(valores) => {
-            setCity(valores.ciudad);
-          }}
-        >
-          {({
-            values,
-            errors,
-            touched,
-            handleSubmit,
-            handleChange,
-            handleBlur,
-            isSubmitting,
-          }) => (
-            <Box sx={secundario}>
-              <form onSubmit={handleSubmit} ref={form}>
-                <TextField
-                  fullWidth
-                  label="Ciudad"
-                  variant="standard"
-                  name="ciudad"
-                  value={values.ciudad}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  error={Boolean(errors.ciudad && touched.ciudad)}
-                  helperText={errors.ciudad && touched.ciudad && errors.ciudad}
-                  autoComplete="off"
-                  margin="normal"
-                  focused
-                />
-                <Button
-                  type="submit"
-                  variant="text"
-                  color="primary"
-                  disabled={isSubmitting}
-                >
-                  Buscar
-                </Button>
-              </form>
-            </Box>
-          )}
-        </Formik>
-      </Box>
+          return errores;
+        }}
+        onSubmit={(valores) => {
+          setCity(valores.ciudad);
+        }}
+      >
+        {({
+          values,
+          errors,
+          touched,
+          handleSubmit,
+          handleChange,
+          handleBlur,
+          isSubmitting,
+        }) => (
+          <Box sx={secundario}>
+            <form onSubmit={handleSubmit} ref={form}>
+              <Container sx={container}>
+                <Box sx={caja}>
+                  <i className="bx bxs-map"></i>
+                  <Input
+                    type="text"
+                    placeholder="nombre de la locacion"
+                    sx={inputText}
+                    fullWidth
+                    name="ciudad"
+                    value={values.ciudad}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={Boolean(errors.ciudad && touched.ciudad)}
+                    helperText={
+                      errors.ciudad && touched.ciudad && errors.ciudad
+                    }
+                    autoComplete="off"
+                    focused
+                  />
+                  <Button
+                    sx={botonBuscar}
+                    type="submit"
+                    disabled={isSubmitting}
+                  >
+                    <CardMedia title="" image={Lupa} component="img" alt={""} />
+                  </Button>
+                </Box>
+                <Box className="weather__box" sx={{ mt: 4 }}>
+                  <Box component={Paper} sx={{ p: 2 }}>
+                    <Box
+                      className="info__weather"
+                      sx={{ display: "flex", alignItems: "center", gap: 2 }}
+                    >
+                      <img src="" alt=" " />
+                      <Typography variant="h5">
+                        Información del clima
+                      </Typography>
+                    </Box>
+                  </Box>
+                </Box>
+              </Container>
+            </form>
+          </Box>
+        )}
+      </Formik>
+    </Box>
       {weatherData ? (
         <WeatherInfo temperature={temperature} />
       ) : (
         <p>Cargando...</p>
       )}
-    </>
+      </>
   );
 };
 
