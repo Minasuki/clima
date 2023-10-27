@@ -1,5 +1,3 @@
-// import sunset from './img/sunset.jpg'
-// import rain from './img/rain.jpg'
 import montaña from "./img/mountains.png";
 
 export const body = {
@@ -11,4 +9,9 @@ export const body = {
   backgroundRepeat: "no-repeat",
   backgroundAttachment: "fixed",
   backgroundPosition: "center center",
+
+  "@media(max-width: 768px)": {
+    backgroundSize: 'cover',
+    backgroundAttachment: 'scroll',
+  },
 };
