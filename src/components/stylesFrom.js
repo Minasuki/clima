@@ -6,12 +6,12 @@ export const principal = {
 };
 
 export const info = {
-  width:'50%'
-}
+  width: "50%",
+};
 
 export const later = {
-width:'100%'
-}
+  width: "100%",
+};
 
 export const secundario = {
   display: "flex",
@@ -61,20 +61,11 @@ export const botonBuscar = {
   right: 0,
   width: "40px",
   height: "100%",
-  background: "transparent",
-  border: "none",
-  outline: "none",
-  fontSize: "28px",
-  color: "#fff",
   padding: "0 15px 0 15px",
-  cursor: "pointer",
 };
 
-//           <i
-//           className="bx bxs-map"
-//           sx={{
-//             position: 'absolute',
-//             left: '10px',
-//             fontSize: '28px',
-//           }}
-//         ></i>
+export const locacion = {
+  position: "absolute",
+  left: "9px",
+  width: "9%",
+};

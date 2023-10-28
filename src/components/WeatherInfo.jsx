@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { Card, CardContent, Typography } from "@mui/material";
 
 const WeatherInfo = ({ temperature }) => {
-  console.log(temperature);
+console.log(temperature);
   return (
     <>
       {temperature ? (

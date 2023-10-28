@@ -8,6 +8,7 @@ import {
   info,
   inputText,
   later,
+  locacion,
   principal,
   secundario,
 } from "./stylesFrom";
@@ -15,6 +16,7 @@ import axios from "axios";
 import WeatherInfo from "./WeatherInfo";
 import Lupa from "../img/lagruesa.svg";
 import WeatherLater from "./WeatherLater";
+import location from "../img/locacion.svg";
 
 const WheaterFrom = () => {
   const form = useRef();
@@ -22,52 +24,42 @@ const WheaterFrom = () => {
 
   const [city, setCity] = useState("");
 
-  const [temperature, setTemperature] = useState({
-    temperatura: null,
-    temMax: null,
-    temMin: null,
-    pais: null,
-    ciudad: null,
-    humedad: null,
-    senReal: null,
-    presion: null,
-    viento: null,
-  });
-  const [weatherData, setWeatherData] = useState(null);
+  const [temperature, setTemperature] = useState();
 
   useEffect(() => {
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang={es}`;
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
     axios
       .get(apiUrl)
       .then((response) => {
-        setWeatherData(response.data);
 
-        setTemperature({
-          temperatura: response.data.main.temp,
-          temMax: response.data.main.temp_max,
-          temMin: response.data.main.temp_min,
-          pais: response.data.sys.country,
-          ciudad: response.data.name,
-          humedad: response.data.main.humidity,
-          senReal: response.data.main.feels_like,
-          presion: response.data.main.pressure,
-          viento: response.data.wind.speed,
-        });
+        if (response.data.main) {
+          setTemperature({
+            temperatura: response.data.main.temp,
+            temMax: response.data.main.temp_max,
+            temMin: response.data.main.temp_min,
+            pais: response.data.sys.country,
+            ciudad: response.data.name,
+            humedad: response.data.main.humidity,
+            senReal: response.data.main.feels_like,
+            presion: response.data.main.pressure,
+            viento: response.data.wind.speed,
+          });
+        }
       })
       .catch((error) => {
         console.error("Error al cargar datos del clima:", error);
+        console.error("Respuesta de error de la API:", error.response);
       });
   }, [city, apiKey]);
 
-  console.log(weatherData);
+  // console.log(weatherData);
 
   return (
     <>
       <Box sx={principal}>
         <Formik
           initialValues={{
-            pais: "",
             ciudad: "",
           }}
           validate={(valores) => {
@@ -99,7 +91,13 @@ const WheaterFrom = () => {
               <form onSubmit={handleSubmit} ref={form}>
                 <Container sx={container}>
                   <Box sx={caja}>
-                    <i className="bx bxs-map"></i>
+                    <CardMedia
+                      title=""
+                      image={location}
+                      component="img"
+                      alt={""}
+                      sx={locacion}
+                    />
                     <Input
                       type="text"
                       placeholder="Ingrese una Ciudad"
@@ -135,14 +133,12 @@ const WheaterFrom = () => {
         </Formik>
       </Box>
       <Box sx={info}>
-        {weatherData ? (
+        {temperature !== undefined ? (
           <WeatherInfo temperature={temperature} />
-        ) : (
-          <p>Cargando...</p>
-        )}
+        ) : null}
       </Box>
       <Box sx={later}>
-        <WeatherLater/>
+        <WeatherLater />
       </Box>
     </>
   );
