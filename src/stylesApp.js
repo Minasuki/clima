@@ -9,6 +9,10 @@ export const body = {
   backgroundRepeat: "no-repeat",
   backgroundAttachment: "fixed",
   backgroundPosition: "center center",
+  display:'flex',
+  ustifyContent: 'space-between',
+    alignItems: 'flex-start',
+    flexWrap: 'wrap',
 
   "@media(max-width: 768px)": {
     backgroundSize: 'cover',

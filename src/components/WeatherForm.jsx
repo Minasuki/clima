@@ -1,19 +1,20 @@
-import {
-  Box,
-  Button,
-  CardMedia,
-  Container,
-  Input,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { Box, Button, CardMedia, Container, Input } from "@mui/material";
 import { Formik } from "formik";
 import { useEffect, useRef, useState } from "react";
-import { principal, secundario } from "./stylesFrom";
+import {
+  botonBuscar,
+  caja,
+  container,
+  info,
+  inputText,
+  later,
+  principal,
+  secundario,
+} from "./stylesFrom";
 import axios from "axios";
 import WeatherInfo from "./WeatherInfo";
-import { botonBuscar, caja, container, inputText } from "./stylesFrom2";
 import Lupa from "../img/lagruesa.svg";
+import WeatherLater from "./WeatherLater";
 
 const WheaterFrom = () => {
   const form = useRef();
@@ -127,30 +128,22 @@ const WheaterFrom = () => {
                       />
                     </Button>
                   </Box>
-                  <Box className="weather__box" sx={{ mt: 4 }}>
-                    <Box component={Paper} sx={{ p: 2 }}>
-                      <Box
-                        className="info__weather"
-                        sx={{ display: "flex", alignItems: "center", gap: 2 }}
-                      >
-                        <img src="" alt=" " />
-                        <Typography variant="h5">
-                          Información del clima
-                        </Typography>
-                      </Box>
-                    </Box>
-                  </Box>
                 </Container>
               </form>
             </Box>
           )}
         </Formik>
       </Box>
-      {weatherData ? (
-        <WeatherInfo temperature={temperature} />
-      ) : (
-        <p>Cargando...</p>
-      )}
+      <Box sx={info}>
+        {weatherData ? (
+          <WeatherInfo temperature={temperature} />
+        ) : (
+          <p>Cargando...</p>
+        )}
+      </Box>
+      <Box sx={later}>
+        <WeatherLater/>
+      </Box>
     </>
   );
 };
