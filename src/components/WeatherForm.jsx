@@ -1,147 +1,127 @@
-import { Box, Button, CardMedia, Container, Input } from "@mui/material";
-import { Formik } from "formik";
-import { useEffect, useRef, useState } from "react";
-import {
-  botonBuscar,
-  caja,
-  container,
-  info,
-  inputText,
-  later,
-  locacion,
-  principal,
-  secundario,
-} from "./stylesFrom";
-import axios from "axios";
-import WeatherInfo from "./WeatherInfo";
-import Lupa from "../img/lagruesa.svg";
-import WeatherLater from "./WeatherLater";
-import location from "../img/locacion.svg";
+import { LoadingButton } from "@mui/lab";
+import { Box, Container, TextField, Typography } from "@mui/material";
+import { useState } from "react";
 
-const WheaterFrom = () => {
-  const form = useRef();
-  const apiKey = import.meta.env.VITE_SOME_KEY;
+const API_WEATHER = `http://api.weatherapi.com/v1/current.json?key=${
+  import.meta.env.VITE_SOME_KEY
+}&lang=es&q=`;
 
+export default function WeatherForm() {
   const [city, setCity] = useState("");
+  const [error, setError] = useState({
+    error: false,
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
 
-  const [temperature, setTemperature] = useState();
+  const [weather, setWeather] = useState({
+    city: "",
+    country: "",
+    temperature: 0,
+    condition: "",
+    conditionText: "",
+    icon: "",
+  });
 
-  useEffect(() => {
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    setError({ error: false, message: "" });
+    setLoading(true);
 
-    axios
-      .get(apiUrl)
-      .then((response) => {
+    try {
+      if (!city.trim()) throw { message: "El campo ciudad es obligatorio" };
 
-        if (response.data.main) {
-          setTemperature({
-            temperatura: response.data.main.temp,
-            temMax: response.data.main.temp_max,
-            temMin: response.data.main.temp_min,
-            pais: response.data.sys.country,
-            ciudad: response.data.name,
-            humedad: response.data.main.humidity,
-            senReal: response.data.main.feels_like,
-            presion: response.data.main.pressure,
-            viento: response.data.wind.speed,
-          });
-        }
-      })
-      .catch((error) => {
-        console.error("Error al cargar datos del clima:", error);
-        console.error("Respuesta de error de la API:", error.response);
+      const res = await fetch(API_WEATHER + city);
+      const data = await res.json();
+
+      if (data.error) {
+        throw { message: data.error.message };
+      }
+
+      console.log(data);
+
+      setWeather({
+        city: data.location.name,
+        country: data.location.country,
+        temperature: data.current.temp_c,
+        condition: data.current.condition.code,
+        conditionText: data.current.condition.text,
+        icon: data.current.condition.icon,
       });
-  }, [city, apiKey]);
-
-  // console.log(weatherData);
+    } catch (error) {
+      console.log(error);
+      setError({ error: true, message: error.message });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <>
-      <Box sx={principal}>
-        <Formik
-          initialValues={{
-            ciudad: "",
-          }}
-          validate={(valores) => {
-            let errores = {};
+    <Container maxWidth="xs" sx={{ mt: 2 }}>
+      <Typography variant="h3" component="h1" align="center" gutterBottom>
+        Weather App
+      </Typography>
+      <Box
+        sx={{ display: "grid", gap: 2 }}
+        component="form"
+        autoComplete="off"
+        onSubmit={onSubmit}
+      >
+        <TextField
+          id="city"
+          label="Ciudad"
+          variant="outlined"
+          size="small"
+          required
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          error={error.error}
+          helperText={error.message}
+        />
 
-            // Validacion ciudad
-            if (!valores.ciudad) {
-              errores.ciudad = "Ciudad inválido";
-            } else if (!/^[a-zA-ZÁ-ÿ\s]{1,40}$/.test(valores.ciudad)) {
-              errores.ciudad = "Ingrese un Ciudad válido";
-            }
+        <LoadingButton
+          type="submit"
+          variant="contained"
+          loading={loading}
+          loadingIndicator="Buscando..."
+        >
+          Buscar
+        </LoadingButton>
+      </Box>
 
-            return errores;
-          }}
-          onSubmit={(valores) => {
-            setCity(valores.ciudad);
+      {weather.city && (
+        <Box
+          sx={{
+            mt: 2,
+            display: "grid",
+            gap: 2,
+            textAlign: "center",
           }}
         >
-          {({
-            values,
-            errors,
-            touched,
-            handleSubmit,
-            handleChange,
-            handleBlur,
-            isSubmitting,
-          }) => (
-            <Box sx={secundario}>
-              <form onSubmit={handleSubmit} ref={form}>
-                <Container sx={container}>
-                  <Box sx={caja}>
-                    <CardMedia
-                      title=""
-                      image={location}
-                      component="img"
-                      alt={""}
-                      sx={locacion}
-                    />
-                    <Input
-                      type="text"
-                      placeholder="Ingrese una Ciudad"
-                      sx={inputText}
-                      fullWidth
-                      name="ciudad"
-                      value={values.ciudad}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      error={Boolean(errors.ciudad && touched.ciudad)}
-                      helperText={
-                        errors.ciudad && touched.ciudad && errors.ciudad
-                      }
-                      autoComplete="off"
-                    />
-                    <Button
-                      sx={botonBuscar}
-                      type="submit"
-                      disabled={isSubmitting}
-                    >
-                      <CardMedia
-                        title=""
-                        image={Lupa}
-                        component="img"
-                        alt={""}
-                      />
-                    </Button>
-                  </Box>
-                </Container>
-              </form>
-            </Box>
-          )}
-        </Formik>
-      </Box>
-      <Box sx={info}>
-        {temperature !== undefined ? (
-          <WeatherInfo temperature={temperature} />
-        ) : null}
-      </Box>
-      <Box sx={later}>
-        <WeatherLater />
-      </Box>
-    </>
-  );
-};
+          <Typography variant="h4" component="h2">
+            {weather.city}, {weather.country}
+          </Typography>
+          <Box
+            component="img"
+            alt={weather.conditionText}
+            src={weather.icon}
+            sx={{ margin: "0 auto" }}
+          />
+          <Typography variant="h5" component="h3">
+            {weather.temperature} °C
+          </Typography>
+          <Typography variant="h6" component="h4">
+            {weather.conditionText}
+          </Typography>
+        </Box>
+      )}
 
-export default WheaterFrom;
+      <Typography textAlign="center" sx={{ mt: 2, fontSize: "10px" }}>
+        Powered by:{" "}
+        <a href="https://www.weatherapi.com/" title="Weather API">
+          WeatherAPI.com
+        </a>
+      </Typography>
+    </Container>
+  );
+}
