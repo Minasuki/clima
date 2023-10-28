@@ -3,7 +3,8 @@ export const container = {
   position: "relative",
   width: "400px",
   height: "555px",
-  background: "purple",
+  background: "rgba(255, 255, 255, .1)",
+  border: "2px solid rgba(255, 255, 255, .2)",
   borderRadius: "16px",
   padding: "20px",
 };
@@ -12,24 +13,23 @@ export const caja = {
   position: "relative",
   width: "100%",
   height: "55px",
-  background: "slateblue",
   display: "flex",
   alignItems: "center",
   gap: 2,
+  // background: "#ECEFF1",
 };
 
 export const inputText = {
   flex: 1,
   position: "absolute",
-  width: "100%",
   height: "100%",
   background: "transparent",
   border: "2px solid rgba(255, 255, 255, .2)",
   outline: "none",
   borderRadius: "10px",
   fontSize: "22px",
-  color: "#fff",
-  fontWeight: "500",
+  color: "black",
+  fontWeight: "700",
   textTransform: "uppercase",
   padding: "0 48px 0 42px",
   "&::placeholder": {
