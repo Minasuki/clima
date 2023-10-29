@@ -1,71 +1,43 @@
 export const principal = {
   display: "flex",
   justifyContent: "center",
-  width: "50%",
+  width: "100%",
   paddingTop: "1%",
 };
 
-export const info = {
-  width: "50%",
-};
-
-export const later = {
-  width: "100%",
-};
-
-export const secundario = {
-  display: "flex",
-  width: "65%",
-};
-
 export const container = {
-  maxWidth: "sm",
-  position: "relative",
-  width: "400px",
-  background: "rgba(255, 255, 255, .1)",
-  border: "2px solid rgba(255, 255, 255, .2)",
-  borderRadius: "16px",
-  padding: "20px",
-};
-
-export const caja = {
-  position: "relative",
-  width: "100%",
-  height: "55px",
+  mt: 2,
   display: "flex",
-  alignItems: "center",
+};
+
+export const formulario = {
+  width: "50%",
+  height: "215px",
+  border: "1px solid rgba(0, 0, 0, 0.2)",
+  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.5)",
+  backgroundColor: "rgba(255, 255, 255, 0.4)",
+  padding: "15px",
+  borderRadius: "15px",
+  backdropFilter: "blur(15px)",
+};
+
+export const informacion = {
+  width: "50%",
+  display: "flex",
+
+};
+
+export const info = {
+  width:'90%',
+  mt: 2,
+  display: "grid",
   gap: 2,
-};
-
-export const inputText = {
-  flex: 1,
-  position: "absolute",
+  textAlign: "center",
   height: "100%",
-  background: "transparent",
-  border: "2px solid rgba(255, 255, 255, .2)",
-  outline: "none",
-  borderRadius: "10px",
-  fontSize: "22px",
-  color: "black",
-  fontWeight: "700",
-  textTransform: "uppercase",
-  padding: "0 48px 0 42px",
-  "&::placeholder": {
-    color: "#fff",
-    textTransform: "capitalize",
-  },
-};
-
-export const botonBuscar = {
-  position: "absolute",
-  right: 0,
-  width: "40px",
-  height: "100%",
-  padding: "0 15px 0 15px",
-};
-
-export const locacion = {
-  position: "absolute",
-  left: "9px",
-  width: "9%",
-};
+  border: "1px solid rgba(0, 0, 0, 0.2)",
+  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.5)",
+  backgroundColor: "rgba(255, 255, 255, 0.4)",
+  padding: "15px",
+  borderRadius: "15px",
+  backdropFilter: "blur(15px)",
+}

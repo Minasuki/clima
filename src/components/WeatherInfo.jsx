@@ -1,41 +1,37 @@
-// import PropTypes from "prop-types";
-// import { Card, CardContent, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import PropTypes from "prop-types";
+import { info } from "./stylesFrom";
 
-// const WeatherInfo = (
-//   {
-//      temperature
-//      }) => {
+const WeatherInfo = ({ weather }) => {
+  return (
+    <>
+      {weather ? (
+        <Box
+          sx={info}
+        >
+          <Typography variant="h4" component="h2">
+            {weather.city}, {weather.country}
+          </Typography>
+          <Box
+            component="img"
+            alt={weather.conditionText}
+            src={weather.icon}
+            sx={{ margin: "0 auto" }}
+          />
+          <Typography variant="h5" component="h3">
+            {weather.temperature} °C
+          </Typography>
+          <Typography variant="h6" component="h4">
+            {weather.conditionText}
+          </Typography>
+        </Box>
+      ):null}
+    </>
+  );
+};
 
-//   return (
-//     <>
-//       {temperature ? (
-//         <Card>
-//           <CardContent>
-//             <Typography variant="h3">Información Climática</Typography>
-//             <Typography variant="h6">{temperature.ciudad}</Typography>
-//             <Typography variant="body1">
-//               Temperatura Actual: {temperature.temperatura} °C
-//             </Typography>
-//             <Typography variant="body1">
-//               Temperatura Máxima: {temperature.temMax} °C
-//             </Typography>
-//             <Typography variant="body1">
-//               Temperatura Mínima: {temperature.temMin} °C
-//             </Typography>
-//           </CardContent>
-//         </Card>
-//       ) : null}
-//     </>
-//   );
-// };
+WeatherInfo.propTypes = {
+  weather: PropTypes.object.isRequired,
+};
 
-// WeatherInfo.propTypes = {
-//   temperature: PropTypes.object.isRequired,
-// };
-
-// export default WeatherInfo;
-const WeatherInfo = () => {
-  return ( <>hola</> );
-}
- 
 export default WeatherInfo;

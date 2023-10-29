@@ -1,6 +1,16 @@
 import { LoadingButton } from "@mui/lab";
-import { Box, Container, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Container,
+  TextField,
+  Typography,
+  InputAdornment,
+  CardMedia,
+} from "@mui/material";
 import { useState } from "react";
+import locacion from "../img/locacion.svg";
+import WeatherInfo from "./WeatherInfo";
+import { container, formulario, informacion, principal } from "./stylesFrom";
 
 const API_WEATHER = `http://api.weatherapi.com/v1/current.json?key=${
   import.meta.env.VITE_SOME_KEY
@@ -38,7 +48,7 @@ export default function WeatherForm() {
         throw { message: data.error.message };
       }
 
-      console.log(data);
+      // console.log(data);
 
       setWeather({
         city: data.location.name,
@@ -57,71 +67,56 @@ export default function WeatherForm() {
   };
 
   return (
-    <Container maxWidth="xs" sx={{ mt: 2 }}>
-      <Typography variant="h3" component="h1" align="center" gutterBottom>
-        Weather App
-      </Typography>
-      <Box
-        sx={{ display: "grid", gap: 2 }}
-        component="form"
-        autoComplete="off"
-        onSubmit={onSubmit}
-      >
-        <TextField
-          id="city"
-          label="Ciudad"
-          variant="outlined"
-          size="small"
-          required
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-          error={error.error}
-          helperText={error.message}
-        />
-
-        <LoadingButton
-          type="submit"
-          variant="contained"
-          loading={loading}
-          loadingIndicator="Buscando..."
-        >
-          Buscar
-        </LoadingButton>
-      </Box>
-
-      {weather.city && (
-        <Box
-          sx={{
-            mt: 2,
-            display: "grid",
-            gap: 2,
-            textAlign: "center",
-          }}
-        >
-          <Typography variant="h4" component="h2">
-            {weather.city}, {weather.country}
+    <Box sx={principal}>
+      <Container sx={container}>
+        <Box sx={formulario}>
+          <Typography variant="h3" component="h1" align="center" gutterBottom>
+            ClearSky: Tu Pronóstico
           </Typography>
           <Box
-            component="img"
-            alt={weather.conditionText}
-            src={weather.icon}
-            sx={{ margin: "0 auto" }}
-          />
-          <Typography variant="h5" component="h3">
-            {weather.temperature} °C
-          </Typography>
-          <Typography variant="h6" component="h4">
-            {weather.conditionText}
-          </Typography>
-        </Box>
-      )}
+            sx={{ display: "grid", gap: 2 }}
+            component="form"
+            autoComplete="off"
+            onSubmit={onSubmit}
+          >
+            <TextField
+              id="city"
+              label="Ciudad"
+              variant="outlined"
+              size="small"
+              required
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              error={error.error}
+              helperText={error.message}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <CardMedia
+                      component="img"
+                      height="22"
+                      image={locacion}
+                      alt="Paella dish"
+                    />
+                  </InputAdornment>
+                ),
+              }}
+            />
 
-      <Typography textAlign="center" sx={{ mt: 2, fontSize: "10px" }}>
-        Powered by:{" "}
-        <a href="https://www.weatherapi.com/" title="Weather API">
-          WeatherAPI.com
-        </a>
-      </Typography>
-    </Container>
+            <LoadingButton
+              type="submit"
+              variant="contained"
+              loading={loading}
+              loadingIndicator="Buscando..."
+            >
+              Buscar
+            </LoadingButton>
+          </Box>
+        </Box>
+      </Container>
+      <Box sx={informacion}>
+        {weather.city && <WeatherInfo weather={weather} />}
+      </Box>
+    </Box>
   );
 }
