@@ -12,10 +12,9 @@ import locacion from "../img/locacion.svg";
 import WeatherInfo from "./WeatherInfo";
 import { container, formulario, informacion, principal } from "./stylesFrom";
 
-const API_WEATHER = `http://api.weatherapi.com/v1/current.json?key=${
-  import.meta.env.VITE_SOME_KEY
-}&lang=es&q=`;
+const API_WEATHER = import.meta.env.VITE_SOME_KEY;
 
+//https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
 export default function WeatherForm() {
   const [city, setCity] = useState("");
   const [error, setError] = useState({
@@ -27,8 +26,9 @@ export default function WeatherForm() {
   const [weather, setWeather] = useState({
     city: "",
     country: "",
-    temperature: 0,
-    condition: "",
+    temperature: "",
+    temperatureMax: "",
+    temperatureMin: "",
     conditionText: "",
     icon: "",
   });
@@ -41,22 +41,25 @@ export default function WeatherForm() {
     try {
       if (!city.trim()) throw { message: "El campo ciudad es obligatorio" };
 
-      const res = await fetch(API_WEATHER + city);
+      const res = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_WEATHER}&units=metric`
+      );
       const data = await res.json();
 
-      if (data.error) {
-        throw { message: data.error.message };
-      }
+      // if (data.error) {
+      //   throw { message: data.error.message };
+      // }
 
-      // console.log(data);
+      console.log(data);
 
       setWeather({
-        city: data.location.name,
-        country: data.location.country,
-        temperature: data.current.temp_c,
-        condition: data.current.condition.code,
-        conditionText: data.current.condition.text,
-        icon: data.current.condition.icon,
+        city: data.name,
+        country: data.sys.country,
+        temperature: data.main.temp,
+        conditionText: data.weather[0].description,
+        temperatureMax: data.main.temp_max,
+        temperatureMin: data.main.temp_min,
+        icon: data.weather[0].main,
       });
     } catch (error) {
       console.log(error);
