@@ -6,9 +6,14 @@ import sol from "../img/sun.svg";
 import nieve from "../img/nieve.svg";
 import sol__nublado from "../img/sol__nublado.svg";
 import lluviecita from "../img/lluviecita.svg";
+import { MaxMin, imagen, tem } from "./stylesInfo";
 
 const WeatherInfo = ({ weather }) => {
   const [img, setImg] = useState();
+
+  const [roundedTemperature, setRoundedTemperature] = useState(0);
+  const [roundedTemperatureMax, setRoundedTemperatureMax] = useState(0);
+  const [roundedTemperatureMin, setRoundedTemperatureMin] = useState(0);
 
   useEffect(() => {
     if (weather) {
@@ -34,6 +39,18 @@ const WeatherInfo = ({ weather }) => {
     }
   }, [weather]);
 
+  useEffect(() => {
+    if (weather) {
+      const temperature = Math.round(weather.temperature);
+      const temperatureMax = Math.round(weather.temperatureMax);
+      const temperatureMin = Math.round(weather.temperatureMin);
+
+      setRoundedTemperature(temperature);
+      setRoundedTemperatureMax(temperatureMax);
+      setRoundedTemperatureMin(temperatureMin);
+    }
+  }, [weather]);
+
   return (
     <>
       {weather ? (
@@ -41,21 +58,43 @@ const WeatherInfo = ({ weather }) => {
           <Typography variant="h4" component="h2">
             {weather.city}, {weather.country}
           </Typography>
-          <Typography variant="h4" component="h2">
-            Temperatura {weather.temperature}°C
-          </Typography>
+
+          <Box sx={tem}>
+            <Typography variant="h4" component="h2">
+              {roundedTemperature}°C
+            </Typography>
+            <Box sx={MaxMin}>
+              <Typography variant="h4" component="h2">
+                <Typography
+                  variant="h4"
+                  component="span"
+                  sx={{ fontSize: "2rem" }}
+                >
+                  &uarr;
+                </Typography>{" "}
+                {roundedTemperatureMax}°C
+              </Typography>
+              <Typography variant="h4" component="h2">
+                <Typography
+                  variant="h4"
+                  component="span"
+                  sx={{ fontSize: "2rem" }}
+                >
+                  &darr;
+                </Typography>{" "}
+                {roundedTemperatureMin}°C
+              </Typography>
+            </Box>
+          </Box>
+
           <Box
             component="img"
             alt={weather.conditionText}
             src={img}
-            sx={{ margin: "0 auto" }}
+            sx={imagen}
           />
           <Typography variant="h4" component="h2">
             {weather.conditionText}
-          </Typography>
-          <Typography variant="h4" component="h2">
-            Temperatura Maxica {weather.temperatureMax}°C, Temperatura Minima{" "}
-            {weather.temperatureMin}°C
           </Typography>
         </Box>
       ) : null}
