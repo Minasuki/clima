@@ -6,7 +6,9 @@ import sol from "../img/sun.svg";
 import nieve from "../img/nieve.svg";
 import sol__nublado from "../img/sol__nublado.svg";
 import lluviecita from "../img/lluviecita.svg";
-import { MaxMin, imagen, tem } from "./stylesInfo";
+import { MaxMin, arrows, flechasMaxMin, imagen, tamañoH3, tem } from "./stylesInfo";
+import arrowUp from "../img/arrowUp.svg";
+import arrowDow from "../img/arrowDow.svg";
 
 const WeatherInfo = ({ weather }) => {
   const [img, setImg] = useState();
@@ -60,19 +62,24 @@ const WeatherInfo = ({ weather }) => {
           </Typography>
 
           <Box sx={tem}>
-            <Typography variant="h4" component="h2">
-              {roundedTemperature}°C
+            <Typography variant="h3" sx={tamañoH3}>
+              {roundedTemperature}°
             </Typography>
             <Box sx={MaxMin}>
-              <Typography variant="h4" component="h2">
+              <Typography variant="h4" component="h2" sx={flechasMaxMin}>
                 <Typography
                   variant="h4"
                   component="span"
                   sx={{ fontSize: "2rem" }}
                 >
-                  &uarr;
+                  <Box
+                    component="img"
+                    alt={"ArrowUp"}
+                    src={arrowUp}
+                    sx={arrows}
+                  />
                 </Typography>{" "}
-                {roundedTemperatureMax}°C
+                {roundedTemperatureMax}°
               </Typography>
               <Typography variant="h4" component="h2">
                 <Typography
@@ -80,9 +87,14 @@ const WeatherInfo = ({ weather }) => {
                   component="span"
                   sx={{ fontSize: "2rem" }}
                 >
-                  &darr;
+                  <Box
+                    component="img"
+                    alt={"ArrowDow"}
+                    src={arrowDow}
+                    sx={arrows}
+                  />
                 </Typography>{" "}
-                {roundedTemperatureMin}°C
+                {roundedTemperatureMin}°
               </Typography>
             </Box>
           </Box>

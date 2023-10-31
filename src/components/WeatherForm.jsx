@@ -46,10 +46,6 @@ export default function WeatherForm() {
       );
       const data = await res.json();
 
-      // if (data.error) {
-      //   throw { message: data.error.message };
-      // }
-
       console.log(data);
 
       setWeather({
@@ -73,8 +69,8 @@ export default function WeatherForm() {
     <Box sx={principal}>
       <Container sx={container}>
         <Box sx={formulario}>
-          <Typography variant="h3" component="h1" align="center" gutterBottom>
-            ClearSky: Tu Pronóstico
+          <Typography variant="h3" component="h1" align="center" gutterBottom fontSize={44}>
+            ClearSky: Your Prognosis
           </Typography>
           <Box
             sx={{ display: "grid", gap: 2 }}
@@ -105,7 +101,6 @@ export default function WeatherForm() {
                 ),
               }}
             />
-
             <LoadingButton
               type="submit"
               variant="contained"

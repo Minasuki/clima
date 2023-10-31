@@ -9,13 +9,13 @@ export const body = {
   backgroundRepeat: "no-repeat",
   backgroundAttachment: "fixed",
   backgroundPosition: "center center",
-  display:'flex',
-  ustifyContent: 'space-between',
-    alignItems: 'flex-start',
-    flexWrap: 'wrap',
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "flex-start",
+  flexWrap: "wrap",
 
   "@media(max-width: 768px)": {
-    backgroundSize: 'cover',
-    backgroundAttachment: 'scroll',
+    backgroundSize: "cover",
+    backgroundAttachment: "scroll",
   },
 };
