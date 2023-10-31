@@ -4,39 +4,50 @@ export const imagen = {
   height: "100px",
 };
 
-export const tem ={
-    display:'flex',
-    alignItems:'center',
-    justifyContent:'center',
-    fontSize: "2.5rem", 
-    marginBottom: '1px',
-}
+export const tem = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  fontSize: "2.5rem",
+  marginBottom: "1px",
+};
 
 export const MaxMin = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center", 
-}
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+};
 
 export const flecha = {
-    fontSize: "2rem",
-}
+  fontSize: "2rem",
+};
 
 export const arrows = {
-    margin: "0 auto",
-    width: "30px",
-    height: "30px",
-    backgroundPosition: "center center",
-}
+  margin: "0 auto",
+  width: "30px",
+  height: "30px",
+  backgroundPosition: "center center",
+};
 
-export const tamañoH3 ={
-    fontSize:64
-}
+export const tamañoH3 = {
+  fontSize: 64,
+};
 
-export const flechasMaxMin ={
-    display:'flex',
-    width:'100%',
-    justifyContent:'space-between',
-    alignItems:'center',
+export const flechasMaxMin = {
+  display: "flex",
+  width: "100%",
+  justifyContent: "space-between",
+  alignItems: "center",
+};
 
-}
+export const wind = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+};
+
+export const windImg = {
+    width: "35px",
+    height: "35px",
+    paddingRight: '5px'
+  };

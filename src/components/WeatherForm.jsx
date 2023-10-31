@@ -14,7 +14,6 @@ import { container, formulario, informacion, principal } from "./stylesFrom";
 
 const API_WEATHER = import.meta.env.VITE_SOME_KEY;
 
-//https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
 export default function WeatherForm() {
   const [city, setCity] = useState("");
   const [error, setError] = useState({
@@ -31,6 +30,7 @@ export default function WeatherForm() {
     temperatureMin: "",
     conditionText: "",
     icon: "",
+    viento:"",
   });
 
   const onSubmit = async (e) => {
@@ -56,6 +56,7 @@ export default function WeatherForm() {
         temperatureMax: data.main.temp_max,
         temperatureMin: data.main.temp_min,
         icon: data.weather[0].main,
+        viento: data.wind.speed,
       });
     } catch (error) {
       console.log(error);

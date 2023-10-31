@@ -6,9 +6,19 @@ import sol from "../img/sun.svg";
 import nieve from "../img/nieve.svg";
 import sol__nublado from "../img/sol__nublado.svg";
 import lluviecita from "../img/lluviecita.svg";
-import { MaxMin, arrows, flechasMaxMin, imagen, tamañoH3, tem } from "./stylesInfo";
+import {
+  MaxMin,
+  arrows,
+  flechasMaxMin,
+  imagen,
+  tamañoH3,
+  tem,
+  wind,
+  windImg,
+} from "./stylesInfo";
 import arrowUp from "../img/arrowUp.svg";
 import arrowDow from "../img/arrowDow.svg";
+import viento from "../img/viento3.svg";
 
 const WeatherInfo = ({ weather }) => {
   const [img, setImg] = useState();
@@ -16,6 +26,8 @@ const WeatherInfo = ({ weather }) => {
   const [roundedTemperature, setRoundedTemperature] = useState(0);
   const [roundedTemperatureMax, setRoundedTemperatureMax] = useState(0);
   const [roundedTemperatureMin, setRoundedTemperatureMin] = useState(0);
+
+  const [velocidadViento, setVelocidadViento] = useState();
 
   useEffect(() => {
     if (weather) {
@@ -50,6 +62,7 @@ const WeatherInfo = ({ weather }) => {
       setRoundedTemperature(temperature);
       setRoundedTemperatureMax(temperatureMax);
       setRoundedTemperatureMin(temperatureMin);
+      setVelocidadViento(Math.round(weather.viento * 3.6));
     }
   }, [weather]);
 
@@ -108,6 +121,18 @@ const WeatherInfo = ({ weather }) => {
           <Typography variant="h4" component="h2">
             {weather.conditionText}
           </Typography>
+
+          <Box sx={wind}>
+            <Box
+              component="img"
+              alt={weather.conditionText}
+              src={viento}
+              sx={windImg}
+            />
+            <Typography variant="h4" component="h2">
+            {velocidadViento}{" "}Km/h
+            </Typography>
+          </Box>
         </Box>
       ) : null}
     </>
