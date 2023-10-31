@@ -1,6 +1,6 @@
 import { Box, CssBaseline } from "@mui/material";
-import WeatherInfo from "./components/WeatherInfo";
-import WeatherForm from "./components/WeatherForm";
+import WeatherInfo from "./components/today/WeatherInfo";
+import WeatherForm from "./components/today/WeatherForm";
 import { body } from "./stylesApp";
 
 function App() {

@@ -49,6 +49,7 @@ export const wind = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    padding: '0 15px',
 };
 
 export const windImg = {

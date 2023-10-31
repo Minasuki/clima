@@ -2,10 +2,10 @@ import { Box, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import { info } from "./stylesFrom";
 import { useEffect, useState } from "react";
-import sol from "../img/sun.svg";
-import nieve from "../img/nieve.svg";
-import sol__nublado from "../img/sol__nublado.svg";
-import lluviecita from "../img/lluviecita.svg";
+import sol from "../../img/sun.svg";
+import nieve from "../../img/nieve.svg";
+import sol__nublado from "../../img/sol__nublado.svg";
+import lluviecita from "../../img/lluviecita.svg";
 import {
   MaxMin,
   arrows,
@@ -19,10 +19,10 @@ import {
   windText,
   windTextFS,
 } from "./stylesInfo";
-import arrowUp from "../img/arrowUp.svg";
-import arrowDow from "../img/arrowDow.svg";
-import viento from "../img/viento3.svg";
-import humedal from "../img/humedal.svg";
+import arrowUp from "../../img/arrowUp.svg";
+import arrowDow from "../../img/arrowDow.svg";
+import viento from "../../img/viento3.svg";
+import humedal from "../../img/humedal.svg";
 
 const WeatherInfo = ({ weather }) => {
   const [img, setImg] = useState();

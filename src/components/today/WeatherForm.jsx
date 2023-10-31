@@ -8,8 +8,8 @@ import {
   CardMedia,
 } from "@mui/material";
 import { useState } from "react";
-import locacion from "../img/locacion.svg";
-import WeatherInfo from "./WeatherInfo";
+import locacion from "../../img/locacion.svg";
+import WeatherInfo from "../today/WeatherInfo";
 import { container, formulario, informacion, principal } from "./stylesFrom";
 
 const API_WEATHER = import.meta.env.VITE_SOME_KEY;
