@@ -40,6 +40,11 @@ export const flechasMaxMin = {
   alignItems: "center",
 };
 
+export const windHumedal ={
+    display: 'flex',
+    justifyContent: 'center',
+}
+
 export const wind = {
     display: 'flex',
     alignItems: 'center',

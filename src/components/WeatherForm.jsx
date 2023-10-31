@@ -31,6 +31,7 @@ export default function WeatherForm() {
     conditionText: "",
     icon: "",
     viento:"",
+    humedad: '',
   });
 
   const onSubmit = async (e) => {
@@ -57,6 +58,7 @@ export default function WeatherForm() {
         temperatureMin: data.main.temp_min,
         icon: data.weather[0].main,
         viento: data.wind.speed,
+        humedad: data.main.humidity,
       });
     } catch (error) {
       console.log(error);

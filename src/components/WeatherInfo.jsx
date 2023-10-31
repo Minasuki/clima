@@ -14,6 +14,7 @@ import {
   tamañoH3,
   tem,
   wind,
+  windHumedal,
   windImg,
   windText,
   windTextFS,
@@ -21,6 +22,7 @@ import {
 import arrowUp from "../img/arrowUp.svg";
 import arrowDow from "../img/arrowDow.svg";
 import viento from "../img/viento3.svg";
+import humedal from "../img/humedal.svg";
 
 const WeatherInfo = ({ weather }) => {
   const [img, setImg] = useState();
@@ -124,16 +126,29 @@ const WeatherInfo = ({ weather }) => {
             {weather.conditionText}
           </Typography>
 
-          <Box sx={wind}>
-            <Box
-              component="img"
-              alt={weather.conditionText}
-              src={viento}
-              sx={windImg}
-            />
-            <Box sx={windText}>
-              <Typography variant="h4" sx={windTextFS}>{velocidadViento} Km/h</Typography>
-              <Typography variant="h4" sx={windTextFS}>Wind speed</Typography>
+          <Box sx={windHumedal}>
+            <Box sx={wind}>
+              <Box component="img" alt={"viento"} src={viento} sx={windImg} />
+              <Box sx={windText}>
+                <Typography variant="h4" sx={windTextFS}>
+                  {velocidadViento} Km/h
+                </Typography>
+                <Typography variant="h4" sx={windTextFS}>
+                  Wind speed
+                </Typography>
+              </Box>
+            </Box>
+
+            <Box sx={wind}>
+              <Box component="img" alt={"humedad"} src={humedal} sx={windImg} />
+              <Box sx={windText}>
+                <Typography variant="h4" sx={windTextFS}>
+                  {weather.humedad} %
+                </Typography>
+                <Typography variant="h4" sx={windTextFS}>
+                  Humidity
+                </Typography>
+              </Box>
             </Box>
           </Box>
         </Box>
