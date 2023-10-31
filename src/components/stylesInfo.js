@@ -47,7 +47,17 @@ export const wind = {
 };
 
 export const windImg = {
-    width: "35px",
-    height: "35px",
+    width: "50px",
+    height: "50px",
     paddingRight: '5px'
   };
+
+  export const windText = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+  }
+
+  export const windTextFS = {
+    fontSize: 18
+  }

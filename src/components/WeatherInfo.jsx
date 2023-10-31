@@ -15,6 +15,8 @@ import {
   tem,
   wind,
   windImg,
+  windText,
+  windTextFS,
 } from "./stylesInfo";
 import arrowUp from "../img/arrowUp.svg";
 import arrowDow from "../img/arrowDow.svg";
@@ -129,9 +131,10 @@ const WeatherInfo = ({ weather }) => {
               src={viento}
               sx={windImg}
             />
-            <Typography variant="h4" component="h2">
-            {velocidadViento}{" "}Km/h
-            </Typography>
+            <Box sx={windText}>
+              <Typography variant="h4" sx={windTextFS}>{velocidadViento} Km/h</Typography>
+              <Typography variant="h4" sx={windTextFS}>Wind speed</Typography>
+            </Box>
           </Box>
         </Box>
       ) : null}
