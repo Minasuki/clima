@@ -21,7 +21,7 @@ import {
 } from "./stylesInfo";
 import arrowUp from "../../img/arrowUp.svg";
 import arrowDow from "../../img/arrowDow.svg";
-import viento from "../../img/viento3.svg";
+import viento from "../../img/viento.svg";
 import humedal from "../../img/humedal.svg";
 
 const WeatherInfo = ({ weather }) => {
