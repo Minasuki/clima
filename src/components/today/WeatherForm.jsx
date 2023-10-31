@@ -11,6 +11,7 @@ import { useState } from "react";
 import locacion from "../../img/locacion.svg";
 import WeatherInfo from "../today/WeatherInfo";
 import { container, formulario, informacion, principal } from "./stylesFrom";
+import WeatherLater from "../5Later/WeatherLater";
 
 const API_WEATHER = import.meta.env.VITE_SOME_KEY;
 
@@ -34,6 +35,14 @@ export default function WeatherForm() {
     humedad: '',
   });
 
+  const [weatherLater, setWeatherLater] = useState({
+    temperature: "",
+    conditionText: "",
+    icon: "",
+    viento:"",
+    humedad: '',
+  });
+
   const onSubmit = async (e) => {
     e.preventDefault();
     setError({ error: false, message: "" });
@@ -45,9 +54,16 @@ export default function WeatherForm() {
       const res = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_WEATHER}&units=metric`
       );
+
+      const resLater = await fetch(
+                `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_WEATHER}&units=metric`
+              );
+
       const data = await res.json();
+      const dataLater = await resLater.json();
 
       console.log(data);
+      console.log(dataLater);
 
       setWeather({
         city: data.name,
@@ -60,6 +76,15 @@ export default function WeatherForm() {
         viento: data.wind.speed,
         humedad: data.main.humidity,
       });
+
+      setWeatherLater({
+                temperature: data.list[0].main.temp,
+                conditionText: data.list[0].weather[0].description,
+                icon: data.list[0].weather[0].main,
+                viento: data.list[0].wind.speed,
+                humedad: data.list[0].main.humidity,
+              });
+
     } catch (error) {
       console.log(error);
       setError({ error: true, message: error.message });
@@ -98,7 +123,7 @@ export default function WeatherForm() {
                       component="img"
                       height="22"
                       image={locacion}
-                      alt="Paella dish"
+                      alt="locacion"
                     />
                   </InputAdornment>
                 ),
@@ -117,6 +142,9 @@ export default function WeatherForm() {
       </Container>
       <Box sx={informacion}>
         {weather.city && <WeatherInfo weather={weather} />}
+      </Box>
+      <Box sx={informacion}>
+        {weatherLater.temperature && <WeatherLater weather={weatherLater} />}
       </Box>
     </Box>
   );
