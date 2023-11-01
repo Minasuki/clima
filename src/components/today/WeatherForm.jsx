@@ -10,7 +10,7 @@ import {
 import { useState } from "react";
 import locacion from "../../img/locacion.svg";
 import WeatherInfo from "../today/WeatherInfo";
-import { container, formulario, informacion, principal } from "./stylesFrom";
+import { container, formulario, informacion, informacionLater, principal } from "./stylesFrom";
 import WeatherLater from "../5Later/WeatherLater";
 
 const API_WEATHER = import.meta.env.VITE_SOME_KEY;
@@ -41,6 +41,7 @@ export default function WeatherForm() {
     icon: "",
     viento: "",
     humedad: "",
+    tiempoText:'',
   });
 
   const onSubmit = async (e) => {
@@ -77,13 +78,16 @@ export default function WeatherForm() {
         humedad: data.main.humidity,
       });
 
-      setWeatherLater({
-        temperature: dataLater.list[0].main.temp,
-        conditionText: dataLater.list[0].weather[0].description,
-        icon: dataLater.list[0].weather[0].main,
-        viento: dataLater.list[0].wind.speed,
-        humedad: dataLater.list[0].main.humidity,
-      });
+      const weatherData = dataLater.list.map((item) => ({
+        temperature: item.main.temp,
+        conditionText: item.weather[0].description,
+        icon: item.weather[0].main,
+        viento: item.wind.speed,
+        humedad: item.main.humidity,
+        tiempoText: item.dt_txt,
+      }));
+      
+      setWeatherLater(weatherData);
     } catch (error) {
       console.log(error);
       setError({ error: true, message: error.message });
@@ -148,8 +152,8 @@ export default function WeatherForm() {
       <Box sx={informacion}>
         {weather.city && <WeatherInfo weather={weather} />}
       </Box>
-      <Box sx={informacion}>
-        {weatherLater.temperature && <WeatherLater weatherLater={weatherLater} />}
+      <Box sx={informacionLater}>
+        {weatherLater.length > 0 && <WeatherLater weatherLater={weatherLater} />}
       </Box>
     </Box>
   );
