@@ -10,7 +10,13 @@ import {
 import { useState } from "react";
 import locacion from "../../img/locacion.svg";
 import WeatherInfo from "../today/WeatherInfo";
-import { container, formulario, informacion, informacionLater, principal } from "./stylesFrom";
+import {
+  container,
+  formulario,
+  informacion,
+  informacionLater,
+  principal,
+} from "./stylesFrom";
 import WeatherLater from "../5Later/WeatherLater";
 
 const API_WEATHER = import.meta.env.VITE_SOME_KEY;
@@ -41,7 +47,7 @@ export default function WeatherForm() {
     icon: "",
     viento: "",
     humedad: "",
-    tiempoText:'',
+    tiempoText: "",
   });
 
   const onSubmit = async (e) => {
@@ -86,7 +92,7 @@ export default function WeatherForm() {
         humedad: item.main.humidity,
         tiempoText: item.dt_txt,
       }));
-      
+
       setWeatherLater(weatherData);
     } catch (error) {
       console.log(error);
@@ -153,7 +159,9 @@ export default function WeatherForm() {
         {weather.city && <WeatherInfo weather={weather} />}
       </Box>
       <Box sx={informacionLater}>
-        {weatherLater.length > 0 && <WeatherLater weatherLater={weatherLater} />}
+        {weatherLater.length > 0 && (
+          <WeatherLater weatherLater={weatherLater} />
+        )}
       </Box>
     </Box>
   );

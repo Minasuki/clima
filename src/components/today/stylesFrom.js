@@ -2,7 +2,8 @@ export const principal = {
   display: "flex",
   justifyContent: "center",
   width: "100%",
-  paddingTop: "1%",
+  padding: "1%",
+  flexWrap: 'wrap',
 };
 
 export const container = {
@@ -22,9 +23,13 @@ export const formulario = {
 };
 
 export const informacion = {
+  width: "30%",
+  display: "flex",
+};
+
+export const informacionLater = {
   width: "50%",
   display: "flex",
-
 };
 
 export const info = {

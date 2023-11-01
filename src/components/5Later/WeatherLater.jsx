@@ -1,99 +1,65 @@
-import { Box,Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import PropTypes from "prop-types";
-import humedal from '../../img/humedal.svg'
-import { useEffect, useState } from "react";
+import humedal from "../../img/humedal.svg";
 import viento from "../../img/viento.svg";
 import sol from "../../img/sun.svg";
 import nieve from "../../img/nieve.svg";
 import sol__nublado from "../../img/sol__nublado.svg";
 import lluviecita from "../../img/lluviecita.svg";
+import mist from "../../img/mist.svg";
 
 const WeatherLater = ({ weatherLater }) => {
-  const [img, setImg] = useState();
-
-  const [roundedTemperature, setRoundedTemperature] = useState(0);
-  
-  const [velocidadViento, setVelocidadViento] = useState();
-
-  useEffect(() => {
-    if (weatherLater) {
-      switch (weatherLater.icon) {
-        case "Clear":
-          setImg(sol);
-          break;
-        case "Clouds":
-          setImg(sol__nublado);
-          break;
-        case "Rain":
-          setImg(lluviecita);
-          break;
-        case "Snow":
-          setImg(nieve);
-          break;
-        case "Mist":
-          setImg(sol__nublado);
-          break;
-        default:
-          break;
-      }
-    }
-  }, [weatherLater]);
-
-  useEffect(() => {
-    if (weatherLater) {
-      const temperature = Math.round(weatherLater.temperature);
-  
-      setRoundedTemperature(temperature);
-      setVelocidadViento(Math.round(weatherLater.viento * 3.6));
-    }
-  }, [weatherLater]);
-
   return (
     <>
-      {weatherLater ? (
-        <Box >
-
-          <Box>
-            <Typography variant="h3" >
-              {roundedTemperature}°
-            </Typography>
-         
-          </Box>
-
-          <Box
-            component="img"
-            alt={weatherLater.conditionText}
-            src={img}
-          />
-          <Typography variant="h4" component="h2">
-            {weatherLater.conditionText}
-          </Typography>
-
-          <Box >
-            <Box>
-              <Box component="img" alt={"viento"} src={viento}  />
-              <Box >
-                <Typography variant="h4" >
-                  {velocidadViento} Km/h
-                </Typography>
-                <Typography variant="h4">
-                  Wind speed
+      {weatherLater && weatherLater.length > 0 ? (
+        <Box>
+          {weatherLater.map((weatherItem, index) => (
+            <>
+              <Box key={index} />
+              <Box>
+                <Typography variant="h3">
+                  {Math.round(weatherItem.temperature)}°
                 </Typography>
               </Box>
-            </Box>
 
-            <Box >
-              <Box component="img" alt={"humedad"} src={humedal}  />
-              <Box >
-                <Typography variant="h4">
-                  {weatherLater.humedad} %
-                </Typography>
-                <Typography variant="h4">
-                  Humidity
-                </Typography>
+              <Box
+                component="img"
+                alt={weatherItem.icon}
+                src={
+                  (weatherItem.icon === "Clouds" && sol__nublado) ||
+                  (weatherItem.icon === "Clear" && sol) ||
+                  (weatherItem.icon === "Rain" && lluviecita) ||
+                  (weatherItem.icon === "Snow" && nieve) ||
+                  (weatherItem.icon === "Mist" && mist)
+                }
+              />
+              <Typography variant="h4" component="h2">
+                {weatherLater.conditionText}
+              </Typography>
+
+              <Box>
+                <Box>
+                  <Box component="img" alt={"viento"} src={viento} />
+                  <Box>
+                    <Typography variant="h4">
+                      {Math.round(weatherItem.viento * 3.6)} Km/h
+                    </Typography>
+                    <Typography variant="h4">Wind speed</Typography>
+                  </Box>
+                </Box>
+
+                <Box>
+                  <Box component="img" alt={"humedad"} src={humedal} />
+                  <Box>
+                    <Typography variant="h4">
+                      {weatherItem.humedad} %
+                    </Typography>
+                    <Typography variant="h4">Humidity</Typography>
+                  </Box>
+                </Box>
               </Box>
-            </Box>
-          </Box>
+            </>
+          ))}
         </Box>
       ) : null}
     </>
@@ -101,7 +67,7 @@ const WeatherLater = ({ weatherLater }) => {
 };
 
 WeatherLater.propTypes = {
-  weatherLater: PropTypes.object.isRequired,
+  weatherLater: PropTypes.array.isRequired,
 };
 
 export default WeatherLater;
