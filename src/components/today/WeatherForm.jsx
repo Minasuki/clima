@@ -31,16 +31,16 @@ export default function WeatherForm() {
     temperatureMin: "",
     conditionText: "",
     icon: "",
-    viento:"",
-    humedad: '',
+    viento: "",
+    humedad: "",
   });
 
   const [weatherLater, setWeatherLater] = useState({
     temperature: "",
     conditionText: "",
     icon: "",
-    viento:"",
-    humedad: '',
+    viento: "",
+    humedad: "",
   });
 
   const onSubmit = async (e) => {
@@ -56,8 +56,8 @@ export default function WeatherForm() {
       );
 
       const resLater = await fetch(
-                `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_WEATHER}&units=metric`
-              );
+        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_WEATHER}&units=metric`
+      );
 
       const data = await res.json();
       const dataLater = await resLater.json();
@@ -78,13 +78,12 @@ export default function WeatherForm() {
       });
 
       setWeatherLater({
-                temperature: data.list[0].main.temp,
-                conditionText: data.list[0].weather[0].description,
-                icon: data.list[0].weather[0].main,
-                viento: data.list[0].wind.speed,
-                humedad: data.list[0].main.humidity,
-              });
-
+        temperature: dataLater.list[0].main.temp,
+        conditionText: dataLater.list[0].weather[0].description,
+        icon: dataLater.list[0].weather[0].main,
+        viento: dataLater.list[0].wind.speed,
+        humedad: dataLater.list[0].main.humidity,
+      });
     } catch (error) {
       console.log(error);
       setError({ error: true, message: error.message });
@@ -97,7 +96,13 @@ export default function WeatherForm() {
     <Box sx={principal}>
       <Container sx={container}>
         <Box sx={formulario}>
-          <Typography variant="h3" component="h1" align="center" gutterBottom fontSize={44}>
+          <Typography
+            variant="h3"
+            component="h1"
+            align="center"
+            gutterBottom
+            fontSize={44}
+          >
             ClearSky: Your Prognosis
           </Typography>
           <Box
@@ -144,7 +149,7 @@ export default function WeatherForm() {
         {weather.city && <WeatherInfo weather={weather} />}
       </Box>
       <Box sx={informacion}>
-        {weatherLater.temperature && <WeatherLater weather={weatherLater} />}
+        {weatherLater.temperature && <WeatherLater weatherLater={weatherLater} />}
       </Box>
     </Box>
   );
