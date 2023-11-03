@@ -8,6 +8,7 @@ import sol__nublado from "../../img/sol__nublado.svg";
 import lluviecita from "../../img/lluviecita.svg";
 import mist from "../../img/mist.svg";
 import { useEffect, useState } from "react";
+// import { format, addDays, parse } from "date-fns";
 
 const WeatherLater = ({ weatherLater }) => {
   const [filteredWeather, setFilteredWeather] = useState([]);
@@ -23,14 +24,14 @@ const WeatherLater = ({ weatherLater }) => {
       uniqueDates.sort();
 
       // 3. Filtra los elementos con las fechas deseadas
-      const filteredData = uniqueDates.map((date) => {
+      const filteredData = uniqueDates.slice(1).map((date) => {
         return weatherLater.find((item) => item.tiempoText.includes(date));
       });
 
       setFilteredWeather(filteredData);
     }
   }, [weatherLater]);
-
+console.log(filteredWeather);
   return (
     <>
       {weatherLater && weatherLater.length > 0 ? (
