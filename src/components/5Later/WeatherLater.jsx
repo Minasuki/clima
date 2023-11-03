@@ -7,15 +7,36 @@ import nieve from "../../img/nieve.svg";
 import sol__nublado from "../../img/sol__nublado.svg";
 import lluviecita from "../../img/lluviecita.svg";
 import mist from "../../img/mist.svg";
+import { useEffect, useState } from "react";
 
 const WeatherLater = ({ weatherLater }) => {
+  const [filteredWeather, setFilteredWeather] = useState([]);
+
+  useEffect(() => {
+    if (weatherLater && weatherLater.length > 0) {
+      // 1. Obtén las fechas únicas de weatherLater
+      const uniqueDates = Array.from(
+        new Set(weatherLater.map((item) => item.tiempoText.split(" ")[0]))
+      );
+
+      // 2. Ordena las fechas en orden ascendente
+      uniqueDates.sort();
+
+      // 3. Filtra los elementos con las fechas deseadas
+      const filteredData = uniqueDates.map((date) => {
+        return weatherLater.find((item) => item.tiempoText.includes(date));
+      });
+
+      setFilteredWeather(filteredData);
+    }
+  }, [weatherLater]);
+
   return (
     <>
       {weatherLater && weatherLater.length > 0 ? (
         <Box>
-          {weatherLater.map((weatherItem, index) => (
-            <>
-              <Box key={index} />
+          {filteredWeather.map((weatherItem, index) => (
+            <Box key={index}>
               <Box>
                 <Typography variant="h3">
                   {Math.round(weatherItem.temperature)}°
@@ -58,7 +79,7 @@ const WeatherLater = ({ weatherLater }) => {
                   </Box>
                 </Box>
               </Box>
-            </>
+            </Box>
           ))}
         </Box>
       ) : null}
