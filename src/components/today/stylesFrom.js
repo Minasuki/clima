@@ -28,7 +28,7 @@ export const informacion = {
 };
 
 export const informacionLater = {
-  width: "50%",
+  width: "95%",
   display: "flex",
 };
 
