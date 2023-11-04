@@ -6,7 +6,8 @@ import sol from "../../img/sun.svg";
 import nieve from "../../img/nieve.svg";
 import sol__nublado from "../../img/sol__nublado.svg";
 import lluviecita from "../../img/lluviecita.svg";
-import haze from '../../img/haze.svg'
+import haze from "../../img/haze.svg";
+import drizzle from "../../img/drizzle.svg";
 import {
   MaxMin,
   arrows,
@@ -52,8 +53,11 @@ const WeatherInfo = ({ weather }) => {
         case "Mist":
           setImg(sol__nublado);
           break;
-case 'Haze':
-  setImg(haze);
+        case "Haze":
+          setImg(haze);
+          break;
+        case "Drizzle":
+          setImg(drizzle);
           break;
       }
     }

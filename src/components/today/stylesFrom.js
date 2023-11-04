@@ -9,6 +9,10 @@ export const principal = {
 export const container = {
   mt: 2,
   display: "flex",
+
+  "@media(max-width: 1280px)": {
+    width: "50%",
+  },
 };
 
 export const formulario = {
@@ -20,6 +24,10 @@ export const formulario = {
   padding: "15px",
   borderRadius: "15px",
   backdropFilter: "blur(15px)",
+
+  "@media(max-width: 1280px)": {
+    width: "100%",
+  },
 };
 
 export const informacion = {
@@ -44,4 +52,8 @@ export const info = {
   padding: "15px",
   borderRadius: "15px",
   backdropFilter: "blur(15px)",
+
+  "@media(max-width: 1280px)": {
+    gap:1,
+  },
 }

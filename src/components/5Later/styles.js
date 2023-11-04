@@ -2,6 +2,10 @@ export const principal = {
   display: "flex",
   width: "70%",
   justifyContent: "space-between",
+
+  "@media(max-width: 1280px)": {
+    width: "75%",
+  },
 };
 
 export const info = {
