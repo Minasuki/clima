@@ -9,6 +9,7 @@ import lluviecita from "../../img/lluviecita.svg";
 import mist from "../../img/mist.svg";
 import { useEffect, useState } from "react";
 import {
+  condition,
   imagen,
   info,
   principal,
@@ -66,7 +67,7 @@ const WeatherLater = ({ weatherLater }) => {
                 }
                 sx={imagen}
               />
-              <Typography variant="h4" component="h2">
+              <Typography variant="h4" sx={condition}>
                 {weatherItem.conditionText}
               </Typography>
 

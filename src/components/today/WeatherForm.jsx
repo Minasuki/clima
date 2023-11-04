@@ -123,7 +123,7 @@ export default function WeatherForm() {
           >
             <TextField
               id="city"
-              label="Ciudad"
+              label="City"
               variant="outlined"
               size="small"
               required

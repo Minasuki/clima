@@ -34,7 +34,6 @@ export const informacionLater = {
 
 export const info = {
   width:'90%',
-  mt: 2,
   display: "grid",
   gap: 2,
   textAlign: "center",
