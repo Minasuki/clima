@@ -6,6 +6,10 @@ export const principal = {
   "@media(max-width: 1280px)": {
     width: "75%",
   },
+
+  "@media(max-width: 1024px)": {
+    width:'100%'
+  },
 };
 
 export const info = {

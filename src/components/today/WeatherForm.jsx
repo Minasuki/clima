@@ -16,6 +16,7 @@ import {
   informacion,
   informacionLater,
   principal,
+  textTitulo,
 } from "./stylesFrom";
 import WeatherLater from "../5Later/WeatherLater";
 
@@ -111,7 +112,7 @@ export default function WeatherForm() {
             component="h1"
             align="center"
             gutterBottom
-            fontSize={44}
+            sx={textTitulo}
           >
             ClearSky: Your Prognosis
           </Typography>

@@ -14,6 +14,10 @@ export const body = {
   alignItems: "flex-start",
   flexWrap: "wrap",
 
+  "@media(max-width: 1024px)": {
+    height:'100%',
+  },
+
   "@media(max-width: 768px)": {
     backgroundSize: "cover",
     backgroundAttachment: "scroll",

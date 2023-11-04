@@ -13,6 +13,10 @@ export const container = {
   "@media(max-width: 1280px)": {
     width: "50%",
   },
+
+  "@media(max-width: 1024px)": {
+    width: "50%",
+  },
 };
 
 export const formulario = {
@@ -33,6 +37,10 @@ export const formulario = {
 export const informacion = {
   width: "30%",
   display: "flex",
+
+  "@media(max-width: 1024px)": {
+    width: '40%',
+  },
 };
 
 export const informacionLater = {
@@ -55,5 +63,13 @@ export const info = {
 
   "@media(max-width: 1280px)": {
     gap:1,
+  },
+}
+
+export const textTitulo = {
+  fontSize:44,
+
+  "@media(max-width: 1024px)": {
+    fontSize:36
   },
 }
