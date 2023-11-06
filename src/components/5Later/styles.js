@@ -37,7 +37,7 @@ export const info = {
   gap:'5px',
 
   "@media(max-width: 540px)": {
-    width:'35%',
+    width:'40%',
     height: 'auto',
   },
 };
