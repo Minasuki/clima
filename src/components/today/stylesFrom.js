@@ -13,6 +13,7 @@ export const principal = {
 };
 
 export const container = {
+  width:'50%',
   mt: 2,
   display: "flex",
 
@@ -30,7 +31,7 @@ export const container = {
 };
 
 export const formulario = {
-  width: "50%",
+  width: "70%",
   height: "240px",
   border: "1px solid rgba(0, 0, 0, 0.2)",
   boxShadow: "0 4px 6px rgba(0, 0, 0, 0.5)",
@@ -38,6 +39,9 @@ export const formulario = {
   padding: "15px",
   borderRadius: "15px",
   backdropFilter: "blur(15px)",
+  display:'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-evenly',
 
   "@media(max-width: 1280px)": {
     width: "100%",
@@ -74,7 +78,6 @@ export const informacionLater = {
 export const info = {
   width: "90%",
   display: "grid",
-  gap: 2,
   textAlign: "center",
   height: "100%",
   border: "1px solid rgba(0, 0, 0, 0.2)",
