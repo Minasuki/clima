@@ -10,13 +10,19 @@ export const principal = {
   "@media(max-width: 1024px)": {
     width:'100%'
   },
+
+  "@media(max-width: 540px)": {
+    flexWrap: 'wrap',
+    alignItems: 'stretch',
+    justifyContent: 'space-evenly',
+  },
+  
 };
 
 export const info = {
   width: "18%",
   display: "flex",
   alignItems:'center',
-  marginTop: 0,
   justifyContent: 'space-between',
   textAlign: "center",
   height: "95%",
@@ -28,7 +34,12 @@ export const info = {
   backdropFilter: "blur(15px)",
   flexDirection: 'column',
   mt: 1,
-  gap:'5px'
+  gap:'5px',
+
+  "@media(max-width: 540px)": {
+    width:'35%',
+    height: 'auto',
+  },
 };
 
 export const temp = {

@@ -3,7 +3,13 @@ export const principal = {
   justifyContent: "center",
   width: "100%",
   padding: "1%",
-  flexWrap: 'wrap',
+  flexWrap: "wrap",
+
+  "@media(max-width: 540px)": {
+    flexDirection: "column",
+    alignItems: "center",
+    gap: 2,
+  },
 };
 
 export const container = {
@@ -16,6 +22,10 @@ export const container = {
 
   "@media(max-width: 1024px)": {
     width: "50%",
+  },
+
+  "@media(max-width: 540px)": {
+    width: "90%",
   },
 };
 
@@ -32,6 +42,10 @@ export const formulario = {
   "@media(max-width: 1280px)": {
     width: "100%",
   },
+
+  "@media(max-width: 540px)": {
+    height: "100%",
+  },
 };
 
 export const informacion = {
@@ -39,7 +53,16 @@ export const informacion = {
   display: "flex",
 
   "@media(max-width: 1024px)": {
-    width: '40%',
+    width: "40%",
+  },
+
+  "@media(max-width: 768px)": {
+    width: "50%",
+  },
+
+  "@media(max-width: 540px)": {
+    width: "90%",
+    justifyContent: "center",
   },
 };
 
@@ -49,7 +72,7 @@ export const informacionLater = {
 };
 
 export const info = {
-  width:'90%',
+  width: "90%",
   display: "grid",
   gap: 2,
   textAlign: "center",
@@ -62,14 +85,14 @@ export const info = {
   backdropFilter: "blur(15px)",
 
   "@media(max-width: 1280px)": {
-    gap:1,
+    gap: 1,
   },
-}
+};
 
 export const textTitulo = {
-  fontSize:44,
+  fontSize: 44,
 
   "@media(max-width: 1024px)": {
-    fontSize:36
+    fontSize: 36,
   },
-}
+};
