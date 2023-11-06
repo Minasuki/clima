@@ -13,7 +13,7 @@ export const principal = {
 };
 
 export const container = {
-  width:'50%',
+  width: "50%",
   mt: 2,
   display: "flex",
 
@@ -39,9 +39,9 @@ export const formulario = {
   padding: "15px",
   borderRadius: "15px",
   backdropFilter: "blur(15px)",
-  display:'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-evenly',
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-evenly",
 
   "@media(max-width: 1280px)": {
     width: "100%",

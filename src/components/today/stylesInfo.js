@@ -40,30 +40,30 @@ export const flechasMaxMin = {
   alignItems: "center",
 };
 
-export const windHumedal ={
-    display: 'flex',
-    justifyContent: 'center',
-}
+export const windHumedal = {
+  display: "flex",
+  justifyContent: "center",
+};
 
 export const wind = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '0 15px',
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  padding: "0 15px",
 };
 
 export const windImg = {
-    width: "50px",
-    height: "50px",
-    paddingRight: '5px'
-  };
+  width: "50px",
+  height: "50px",
+  paddingRight: "5px",
+};
 
-  export const windText = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-  }
+export const windText = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
+};
 
-  export const windTextFS = {
-    fontSize: 18
-  }
+export const windTextFS = {
+  fontSize: 18,
+};

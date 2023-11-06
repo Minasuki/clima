@@ -7,12 +7,12 @@ import WeatherLater from "./components/5Later/WeatherLater";
 function App() {
   return (
     <>
-    <Box sx={body}>
-      <CssBaseline />
-      <WeatherForm />
-      <WeatherInfo />
-      <WeatherLater />
-    </Box>
+      <Box sx={body}>
+        <CssBaseline />
+        <WeatherForm />
+        <WeatherInfo />
+        <WeatherLater />
+      </Box>
     </>
   );
 }
