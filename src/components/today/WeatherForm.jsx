@@ -19,6 +19,7 @@ import {
   textTitulo,
 } from "./stylesFrom";
 import WeatherLater from "../5Later/WeatherLater";
+import axios from "axios";
 
 const API_WEATHER = import.meta.env.VITE_SOME_KEY;
 
@@ -59,19 +60,16 @@ export default function WeatherForm() {
     try {
       if (!city.trim()) throw { message: "El campo ciudad es obligatorio" };
 
-      const res = await fetch(
+      const response = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_WEATHER}&units=metric`
       );
 
-      const resLater = await fetch(
+      const responseLater = await axios.get(
         `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_WEATHER}&units=metric`
       );
 
-      const data = await res.json();
-      const dataLater = await resLater.json();
-
-      console.log(data);
-      console.log(dataLater);
+      const data = response.data;
+      const dataLater = responseLater.data;
 
       setWeather({
         city: data.name,
@@ -96,7 +94,7 @@ export default function WeatherForm() {
 
       setWeatherLater(weatherData);
     } catch (error) {
-      console.log(error);
+      console.error("Error:", error);
       setError({ error: true, message: error.message });
     } finally {
       setLoading(false);

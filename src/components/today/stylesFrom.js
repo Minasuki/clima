@@ -31,7 +31,7 @@ export const container = {
 
 export const formulario = {
   width: "50%",
-  height: "215px",
+  height: "240px",
   border: "1px solid rgba(0, 0, 0, 0.2)",
   boxShadow: "0 4px 6px rgba(0, 0, 0, 0.5)",
   backgroundColor: "rgba(255, 255, 255, 0.4)",
